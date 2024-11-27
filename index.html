@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>Статус грузов ТК</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <h1>Отслеживания грузов транспортной компании</h1>
+        </div>
+    </header>
+    <template id="cargoTemplate">
+            <td class="idCargoTemplate"></td>
+            <td class="nameTemplate"></td>
+            <td class="statusTemplate">
+                <form id="statusFilterTemplate">
+                    <select id="statusIdTemplate" name="status" form="statusFilterTemplate">
+                        <option value="Ожидает отправки">Ожидает отправки</option>
+                        <option value="В пути">В пути</option>
+                        <option value="Доставлен">Доставлен</option>
+                    </select>
+                </form>
+            </td>
+            <td class="originTemplate"></td>
+            <td class="destinationTemplate"></td>
+            <td class="departureDateTemplate"></td>
+    </template>
+    <main>
+        <div class="add-new-cargo">
+            <form class="new-cargo" onsubmit="return false">
+                <label for="name">Название груза</label>
+                <input id="name" type="text" placeholder="Введите название груза">
+                <label for="origin">Пункт отправления</label>
+                <input id="origin" type="text" placeholder="Введите пункт отправления">
+                <label for="destination">Пункт назначения</label>
+                <input id="destination" type="text" placeholder="Введите пункт назначения">
+                <label for="departureDate">Дата отправления</label>
+                <input id="departureDate" type="text" placeholder="Введите дату отправления в формате 2024-11-26">
+                <button id="add-new-cargo-button">Добавить груз</button>
+            </form>
+        </div>
+        <div class="status">
+            <form id="statusFilter">
+                <label for="statusId">Выберите статус груза сортировки списка</label>
+                <select id="statusId" name="status" form="statusFilter">
+                    <option value="Все статусы" selected>Все статусы</option>
+                    <option value="Ожидает отправки">Ожидает отправки</option>
+                    <option value="В пути">В пути</option>
+                    <option value="Доставлен">Доставлен</option>
+                </select>
+            </form>
+        </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Номер груза</th>
+                    <th>Название груза</th>
+                    <th>Статус груза</th>
+                    <th>Пункт отправления</th>
+                    <th>Пункт назначения</th>
+                    <th>Дата отправления</th>
+                </tr>
+            </thead>
+            <tbody id="cargo">               
+            </tbody>
+        </table>
+
+    </main>
+    <footer>
+        <p>©️ 2024 Иван Каширин</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+table {
+    width: 60vw;
+    margin: 5vh 0 0 0;
+}
+
+.new-cargo {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 5vh 0;
+}
+
+td select {
+    width: 100%;
+}
+
+#name {
+    margin: 1vh 0 1vh 0;
+}
+
+#origin {
+    margin: 1vh 0 1vh 0;
+}
+
+#destination {
+    margin: 1vh 0 1vh 0;
+}
+
+#departureDate {
+    margin: 1vh 0 1vh 0;
+}
