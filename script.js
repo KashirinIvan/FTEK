@@ -16,7 +16,7 @@ const cargoList = [
         departureDate: "2024-11-26"
     }
 ];
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
     /*функция сортировки по выбраному статусу */
     function selectedFilter(cargo) {
         let statusId = document.querySelector('#statusId')
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
         let cargo = {};
         cargo.id = "CARGO" + String(cargoList.length + 1).padStart(3, '0');
         let name = document.getElementById('name').value;
+        document.getElementById('name').value = '';
         if (name !== '') {
             cargo.name = name;
         } else {
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
         cargo.status = "Ожидает отправки";
         let origin = document.getElementById('origin').value;
+        document.getElementById('origin').value = '';
         if (origin !== '') {
             cargo.origin = origin;
         } else {
@@ -48,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function(){
             return;
         }
         let destination = document.getElementById('destination').value
+        document.getElementById('destination').value = '';
         if (destination !== '') {
             cargo.destination = destination;
         } else {
@@ -55,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function(){
             return;
         }
         let departureDate = document.getElementById('departureDate').value;
+        document.getElementById('departureDate').value = '';
         if (departureDate !== '') {
             cargo.departureDate = departureDate;
         } else {
@@ -82,9 +86,25 @@ document.addEventListener("DOMContentLoaded", function(){
         cargoTemplate.querySelector('.statusTemplate').addEventListener('change', function (e) {
             if (e.target.value === 'Доставлен') {
                 var date = new Date();
-                if (String(date.getFullYear()) >= e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(0, 4) &&
-                    String(date.getMonth() + 1) >= e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(5, 7) &&
-                    String(date.getDate()) >= e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(8, 10)) {
+                if (String(date.getFullYear()) === e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(0, 4)){
+                    if (String(date.getMonth() + 1).padStart(2, '0') === e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(5, 7).padStart(2, '0')) {
+                        if (String(date.getDate()).padStart(2, '0') >= e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(8, 10).padStart(2, '0')) {
+                            cargoList.find(cargo => cargo.id === e.target.parentNode.parentNode.parentNode.children[0].textContent).status = e.target.value
+                            e.target.style.backgroundColor = "green"
+                        } else {
+                            alert("Груз не может быть доставлен при плановой отправке " + e.target.parentNode.parentNode.parentNode.children[5].textContent)
+                            updateCargoList(cargoList)
+                            return;
+                        }
+                    } else if (String(date.getMonth() + 1).padStart(2, '0') > e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(5, 7).padStart(2, '0')) {
+                        cargoList.find(cargo => cargo.id === e.target.parentNode.parentNode.parentNode.children[0].textContent).status = e.target.value
+                        e.target.style.backgroundColor = "green"
+                    } else {
+                        alert("Груз не может быть доставлен при плановой отправке " + e.target.parentNode.parentNode.parentNode.children[5].textContent)
+                        updateCargoList(cargoList)
+                        return;
+                    }
+                } else if (String(date.getFullYear()) > e.target.parentNode.parentNode.parentNode.children[5].textContent.slice(0, 4)){
                     cargoList.find(cargo => cargo.id === e.target.parentNode.parentNode.parentNode.children[0].textContent).status = e.target.value
                     e.target.style.backgroundColor = "green"
                 } else {
